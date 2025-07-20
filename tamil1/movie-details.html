@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Include FontAwesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #0f172a;
+      
+    /* Flash animation */
+    @keyframes flash {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8); }
+      70% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+    
+    @keyframes blinkRed {
+      0%, 100% { 
+        background-color: #ff3e3e;
+        box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5);
+      }
+      50% { 
+        background-color: #ff6b6b;
+        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.8);
+      }
+    }
+    
+    .icon-button#more-icon {
+      animation: blinkRed 1.5s infinite;
+      background-color: #ff3e3e;
+      border-color: #ff3e3e;
+    }
+    
+    .icon-button#more-icon:hover {
+      animation: none;
+      background-color: #ff6b6b;
+      transform: scale(1.05);
+    }
+      --card-bg: rgba(30, 41, 59, 0.95);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    
+    .home-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0.5rem 0.5rem 6rem;
+      box-sizing: border-box;
+    }
+
+    /* Movie details styles */
+
+    .welcome-section {
+      text-align: center;
+      padding: 1.5rem 0.5rem;
+      margin: 0.5rem 0.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s ease infinite;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-transform: capitalize;
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+      z-index: 0;
+      animation: rotate 15s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .movie-details {
+      text-align: center;
+      max-width: 1000px;
+      width: 100%;
+      padding: 0 0.5rem;
+      margin: 0 auto;
+    }
+    .movie-details img {
+      width: 100%;
+      max-height: 50vh;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      pointer-events: none;
+    }
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      background: rgba(99, 102, 241, 0.9);
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 36px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+      backdrop-filter: blur(4px);
+    }
+    
+    .play-button:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: var(--primary);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    }
+    .play-button:hover {
+      background-color: rgba(255, 0, 0, 0.7);
+    }
+    .image-container {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .icon-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+      gap: 12px;
+    }
+    
+    .icon-button, .download-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text);
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: rgba(30, 41, 59, 0.8);
+      min-width: 100px;
+      backdrop-filter: blur(8px);
+    }
+    
+    .icon-button:hover, .download-button:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+    }
+    .icon-button i {
+      margin-right: 8px;
+    }
+    .icon-button:hover, .download-button:hover {
+      color: #555;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      max-width: 100vw;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0.5rem 0 0.75rem;
+      border-top: 1px solid rgba(99, 102, 241, 0.15);
+      z-index: 1000;
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+      height: 68px;
+      box-sizing: border-box;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .nav-item .material-icons {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    
+    .nav-item span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-around;
+      padding: 0.75rem 0;
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+    }
+
+    .nav-item .material-icons {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-item span {
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 0 0 68px;
+      }
+      
+      .movie-details {
+        padding: 0.5rem;
+      }
+      
+      .play-button {
+        width: 65px;
+        height: 65px;
+        font-size: 32px;
+      }
+      
+      .icon-buttons {
+        margin: 1rem 0;
+        gap: 8px;
+      }
+      
+      .icon-button, .download-button {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        min-width: 85px;
+      }
+      
+      .nav-item {
+        padding: 0.5rem 0.75rem;
+      }
+      
+      .nav-item .material-icons {
+        font-size: 22px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .movie-details {
+        padding: 0.25rem;
+      }
+      
+      .play-button {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+      }
+      
+      .icon-buttons {
+        gap: 6px;
+      }
+      
+      .icon-button, .download-button {
+        padding: 0.4rem 0.8rem;
+        min-width: 75px;
+        font-size: 0.75rem;
+      }
+      
+      .movie-details h1 {
+        font-size: 1.4rem;
+        margin: 0.75rem 0;
+        padding: 0 0.5rem;
+      }
+      
+      .nav-item {
+        padding: 0.4rem 0.5rem;
+      }
+      
+      .nav-item .material-icons {
+        font-size: 20px;
+      }
+      
+      .nav-item span {
+        font-size: 0.65rem;
+      }
+    }
+    /* YouTube Subscribe Popup Styles */
+    .subscribe-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .subscribe-popup-content {
+      background-color: #1f1f1f;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    .subscribe-popup-content h2 {
+      color: #ff0000;
+      margin-bottom: 20px;
+    }
+    .subscribe-popup-content p {
+      color: #fff;
+      margin-bottom: 25px;
+    }
+    .subscribe-button {
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .subscribe-button:hover {
+      background-color: #cc0000;
+    }
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="home-container">
+    <div class="welcome-section">
+      <h1 id="movie-title"></h1>
+    </div>
+    <div class="movie-details">
+    
+    <!-- Social Share Buttons placed under the title -->
+    <div class="icon-buttons" style="margin-bottom: 20px;">
+      <div class="icon-button" id="whatsapp-icon">
+        <i class="fab fa-whatsapp"></i> Share
+      </div>
+      <div class="icon-button" id="facebook-icon">
+        <i class="fab fa-facebook-f"></i> Share
+      </div>
+      <div class="icon-button" id="more-icon">
+        <span class="material-icons">more_vert</span> More
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img id="movie-image" alt="Movie Image">
+      <span class="material-icons play-button" id="play-button">play_circle_filled</span>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="navigateTo('index.html')">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('category.html')">
+      <span class="material-icons">category</span>
+      <span>Category</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('favorites.html')">
+      <span class="material-icons">favorite</span>
+      <span>Favorites</span>
+    </div>
+  </div>
+
+  <!-- Subscribe Popup -->
+  <div class="subscribe-popup" id="subscribe-popup">
+    <div class="subscribe-popup-content">
+      <h2>Subscribe to our channel!</h2>
+      <p>WATCH FULL MOVE SUBSCRIBE NOW!</p>
+      <button class="subscribe-button" id="subscribe-button">Subscribe</button>
+      <span class="close-popup" id="close-popup">&times;</span>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <div class="nav-item" onclick="navigateTo('home.html')">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('category.html')">
+      <span class="material-icons">category</span>
+      <span>Categories</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('favorites.html')">
+      <span class="material-icons">favorite</span>
+      <span>Favorites</span>
+    </div>
+  </nav>
+
+  <script>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    // Get query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get('title');
+    const image = urlParams.get('image');
+    const video = urlParams.get('video');
+    const movieId = urlParams.get('id');
+
+    // Display movie details
+    document.getElementById('movie-title').innerText = decodeURIComponent(title);
+    document.getElementById('movie-image').src = decodeURIComponent(image);
+
+    // Play video when play button is clicked
+    document.getElementById('play-button').addEventListener('click', () => {
+      subscribePopup.style.display = 'flex';
+    });
+
+    // Add event listener to WhatsApp icon
+    document.getElementById('whatsapp-icon').addEventListener('click', () => {
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out this movie: ${title} - ${video}`)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+
+    // Add event listener to Facebook icon
+    document.getElementById('facebook-icon').addEventListener('click', () => {
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(video)}`;
+      window.open(facebookUrl, '_blank');
+    });
+
+    // Fetch movie details from the JSON file
+    fetch("https://blacktvafterott.in/movielist.json")
+      .then(response => response.json())
+      .then(data => {
+        const movie = data.find(movie => movie.id == movieId);
+        if (movie) {
+          const downUlr1 = movie.downUlr1;
+
+          // Add event listener to more icon
+          document.getElementById('more-icon').addEventListener('click', () => {
+            const newPageUrl = `movie_page.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&video=${encodeURIComponent(video)}&download=${encodeURIComponent(downUlr1)}&target=external`;
+            window.open(newPageUrl, '_blank');
+          });
+        } else {
+          console.error('Movie not found');
+        }
+      })
+      .catch(error => console.error('Error fetching JSON:', error));
+
+    // Subscribe popup functionality
+    const subscribePopup = document.getElementById('subscribe-popup');
+    const subscribeButton = document.getElementById('subscribe-button');
+    const closeButton = document.getElementById('close-popup');
+    const playButton = document.getElementById('play-button');
+
+    // YouTube channel link
+    const youtubeChannelLink = 'https://www.youtube.com/@shobithasgowda1301?sub_confirmation=1&target=external';
+
+    // Open YouTube channel when subscribe button is clicked
+    subscribeButton.addEventListener('click', () => {
+      window.open(youtubeChannelLink, '_blank');
+    });
+
+    closeButton.addEventListener('click', () => {
+      subscribePopup.style.display = 'none';
+    });
+
+    // Optional: Close popup if clicked outside the content
+    subscribePopup.addEventListener('click', (event) => {
+      if (event.target === subscribePopup) {
+        subscribePopup.style.display = 'none';
+      }
+    });
+  </script>
+  <!-- AOS Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+      
+      // Make sure the page is scrolled to top on load
+      window.scrollTo(0, 0);
+    });
+    
+    // Function to handle window resize
+    function handleResize() {
+      // Add any responsive JS logic here if needed
+    }
+    
+    // Add resize event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Initial call
+    handleResize();
+  </script>
+  </body>
+</html>

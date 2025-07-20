@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multicinema Replica - Actor Movies</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern UI Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.95);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 70px;
+    }
+
+    .home-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Welcome section styles */
+
+
+    .welcome-section {
+      text-align: center;
+      padding: 1.5rem 0.5rem;
+      margin: 1rem 0.5rem 1.5rem 0.5rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .welcome-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .movie-count {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      background: rgba(99, 102, 241, 0.2);
+      border-radius: 15px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #c7d2fe;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s ease infinite;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-transform: capitalize;
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+      z-index: 0;
+      animation: rotate 15s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .section-title h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s ease infinite;
+      text-transform: capitalize;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+      padding: 0.5rem 0 1rem;
+      width: 100%;
+    }
+
+    .movie-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--card-bg);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .movie-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .movie-item a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 150%;
+      overflow: hidden;
+    }
+
+    .movie-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .movie-item .year {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+
+    .movie-info {
+      padding: 0.75rem 0.5rem;
+      background: transparent;
+      min-height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .movie-item h3 {
+      font-size: 0.9rem;
+      margin: 0;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(99, 102, 241, 0.15);
+      padding: 0.5rem 0 0.75rem;
+      z-index: 1000;
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+      height: 68px;
+      box-sizing: border-box;
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.7rem;
+      transition: all 0.2s ease;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .nav-item i {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+    }
+
+    .nav-item:active {
+      transform: scale(0.95);
+    }
+
+    @media (max-width: 768px) {
+      .section-title h1 {
+        font-size: 1.75rem;
+      }
+      
+      .movies-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .section-title h1 {
+        font-size: 1.5rem;
+      }
+      
+      .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+      
+      .movie-info h3 {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Welcome Section -->
+  
+  <div class="home-container">
+    <div class="welcome-section">
+      <div class="welcome-content">
+        <h1 id="actor-name"></h1>
+        <span id="movie-count" class="movie-count"></span>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+        <div id="movieList" class="movies-grid"></div>
+      </div>
+    </main>
+  </div> <!-- Close home-container -->
+
+  <nav class="bottom-nav">
+    <div class="nav-item" onclick="navigateTo('home.html')">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('category.html')">
+      <span class="material-icons">category</span>
+      <span>Categories</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('favorites.html')">
+      <span class="material-icons">favorite</span>
+      <span>Favorites</span>
+    </div>
+  </nav>
+
+  <!-- Modern UI Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/smooth-scrollbar@8.5.2/dist/smooth-scrollbar.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" defer></script>
+  <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js" defer></script>
+  
+  <script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+    });
+    // Base URL for the JSON files stored in the local actors folder
+    const baseUrl = 'actors/';
+
+    // Function to get actor image by name
+    function getActorImage(actorName, actorCategory) {
+      const actor = actorCategory.find(actor => actor.name === actorName);
+      return actor ? actor.image : '';
+    }
+
+    // Function to display movies
+    function displayMovies(actor, movies, actorCategory) {
+      const movieList = document.getElementById('movieList');
+      movieList.innerHTML = ''; // Clear existing content
+
+      // Filter movies based on actor
+      const filteredMovies = movies.filter(movie => movie.actor === actor);
+      
+      // Update the header with movie count
+      const movieCount = filteredMovies.length;
+      const actorNameElement = document.getElementById('actor-name');
+      const movieCountElement = document.getElementById('movie-count');
+      
+      actorNameElement.textContent = `${actor}'s Movies`;
+      movieCountElement.textContent = `${movieCount} ${movieCount === 1 ? 'Movie' : 'Movies'}`;
+
+      filteredMovies.forEach(movie => {
+        const movieItem = document.createElement('div');
+        movieItem.className = 'movie-item';
+        
+        // Modify URL to include &target=external
+        const movieUrl = movie.url.includes('?') 
+          ? `${movie.url}&target=external` 
+          : `${movie.url}?target=external`;
+        
+        movieItem.innerHTML = `
+          <a href="${movieUrl}" target="_blank">
+            <div class="image-container">
+              <img src="${movie.thumb}" alt="${movie.title}">
+              ${movie.year ? `<span class="year">${movie.year}</span>` : ''}
+            </div>
+            <div class="movie-info">
+              <h3>${movie.title}</h3>
+            </div>
+          </a>
+        `;
+        movieList.appendChild(movieItem);
+      });
+    }
+
+    // Function to navigate to a different page
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    // Initialize page content
+    document.addEventListener('DOMContentLoaded', function() {
+
+    // Get the actor parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const actor = urlParams.get('actor');
+
+    // Actor name will be displayed in the displayMovies function after loading the movies
+
+    // Construct the URL for the actor-specific JSON file
+    // Encode the actor name to handle spaces and special characters
+    const encodedActorName = encodeURIComponent(actor);
+    const actorJsonUrl = `${baseUrl}${encodedActorName}.json`;
+
+    // Fetch movie data from the actor-specific JSON file
+    fetch(actorJsonUrl)
+      .then(response => {
+        if (!response.ok) {
+          // If the response is not OK, throw an error
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const actorCategory = data.actorCategory || []; // Ensure actorCategory is an array
+        const movies = data.movies || []; // Ensure movies is an array
+        
+        // Display movies for the selected actor
+        displayMovies(actor, movies, actorCategory);
+      })
+      .catch(error => {
+        console.error('Error fetching JSON:', error);
+        // Display an error message to the user
+        document.getElementById('movieList').innerHTML = '<p>Error loading movies. Please try again later.</p>';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multicinema Replica - Categories</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.95);
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0 0 60px;
+      min-height: 100vh;
+    }
+
+    .home-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0.5rem 0.5rem 6rem;
+      box-sizing: border-box;
+    }
+
+    .welcome-section {
+      text-align: center;
+      padding: 1.5rem 0.5rem;
+      margin: 0.5rem 0.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .welcome-section h1 {
+      font-size: 2rem;
+      margin: 0;
+      color: var(--text);
+    }
+    
+    /* Welcome section styles */
+    .welcome-section {
+      text-align: center;
+      padding: 1.5rem 0.5rem;
+      margin: 0.5rem 0.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .welcome-section {
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s ease infinite;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+      z-index: 0;
+      animation: rotate 15s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .welcome-section .search-container {
+      position: relative;
+      max-width: 100%;
+      margin: 1rem 0.5rem 0;
+      padding: 0 0.5rem;
+      z-index: 1;
+    }
+    
+    .search-container {
+      position: relative;
+      max-width: 100%;
+      margin: 0.5rem 0.5rem 1rem;
+      padding: 0;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 0.7rem 1rem 0.7rem 2.8rem;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-bar:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    .clear-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .clear-icon:hover {
+      color: var(--primary);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 1rem 0 1rem;
+    }
+
+    .section-title h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+      padding: 0.5rem 0 1rem;
+      width: 100%;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 140%;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .category-card:hover .image-container img {
+      transform: scale(1.05);
+    }
+
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(99, 102, 241, 0.8);
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem 0.6rem 1rem;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .back-button:hover {
+      background: rgba(99, 102, 241, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .back-button i {
+      font-size: 1.3rem;
+      color: white;
+    }
+
+    .movie-info {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .movie-info h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 0.4rem 0 0.6rem;
+      z-index: 1000;
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+      height: 60px;
+      box-sizing: border-box;
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .nav-item .material-icons {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .nav-item span {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+      }
+
+      .section-title h1 {
+        font-size: 1.7rem;
+      }
+
+      .search-bar {
+        padding: 0.7rem 1rem 0.7rem 2.8rem;
+        font-size: 0.95rem;
+      }
+
+      .search-icon {
+        left: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .section-title h1 {
+        font-size: 1.5rem;
+      }
+
+      .section-title {
+        margin: 1rem 0 1.5rem;
+      }
+
+      .movie-info h3 {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="home-container">
+    <div class="welcome-section">
+      <h1>Categories</h1>
+      <div class="search-container">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search actors..." oninput="filterActors()" />
+        <span class="material-icons search-icon">search</span>
+        <span class="material-icons clear-icon" onclick="clearSearch()">cancel</span>
+      </div>
+    </div>
+  <main>
+    <div class="container">
+
+      <div id="category-container" class="movies-grid">
+        <!-- Actor Cards -->
+        <div class="category-card" onclick="showActorMovies('Rajinikanth')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNqkQRwwOLhnVsvHZDp4xOu6pCm7VAXO1gkbUIDfa-h2lTy7kwTYGWzFOlHKdOt7oqSic&usqp=CAU" alt="Rajinikanth" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Rajinikanth</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Kamal Haasan')">
+          <div class="image-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Kamal_haasan.jpg/220px-Kamal_haasan.jpg" alt="Kamal Haasan" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Kamal Haasan</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Joseph Vijay')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYRqm6rMCJrWQ00Movz1jmTRJW_1arTmohiQ&s" alt="Joseph Vijay" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Joseph Vijay</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Ajith Kumar')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkqHKEzpdVtPEyy_tdQaadPYli7ez_tEdfSw&s" alt="Ajith Kumar" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Ajith Kumar</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Suriya')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIkb5t4vELqL6wFlUd9Va3fRDZ0bUs5at-3A&s" alt="Suriya" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Suriya</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Vijay Sethupathi')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-5OGyaHyvqdAQ4Gl_eUEPUnonUjbbjXNuw&s" alt="Vijay Sethupathi" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Vijay Sethupathi</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Sivakarthikeyan')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr805gUHwIL3Mc_3C2rhv1Oafkp7kFvwa0TQ&s" alt="Sivakarthikeyan" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Sivakarthikeyan</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Karthi')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl3wIc6RU0rY8m86OccUWc6jrMyhMrqAES9Q&s" alt="Karthi" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Karthi</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Kathir')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YB8d3bLPgaUmukCWEnfwVsHVgD_YR58ItQ&s" alt="Kathir" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Kathir</h3>
+          </div>
+        </div>
+        <div class="category-card" onclick="showActorMovies('Jayam Ravi')">
+          <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mmPyFKF5TyRXcMFBs02EfF8nu8SlXvVq1g&s" alt="Jayam Ravi" loading="lazy">
+          </div>
+          <div class="movie-info">
+            <h3>Jayam Ravi</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div> <!-- Close home-container -->
+
+<nav class="bottom-nav">
+  <div class="nav-item" onclick="navigateTo('home.html')">
+    <span class="material-icons">home</span>
+    <span>Home</span>
+  </div>
+  <div class="nav-item active" onclick="navigateTo('category.html')">
+    <span class="material-icons">category</span>
+    <span>Categories</span>
+  </div>
+  <div class="nav-item" onclick="navigateTo('favorites.html')">
+    <span class="material-icons">favorite</span>
+    <span>Favorites</span>
+  </div>
+</nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+  
+  <!-- Inline Script -->
+  <script>
+    // Back button functionality
+
+
+    // Show/hide back button based on page
+    document.addEventListener('DOMContentLoaded', function() {
+      const backButton = document.querySelector('.back-button');
+      if (backButton) backButton.style.display = 'flex';
+    });
+
+    function showActorMovies(actor) {
+      // Redirect to actor_movies.html with the actor parameter
+      window.location.href = `actor_movies.html?actor=${actor}`;
+    }
+
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    function filterActors() {
+      const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+      const categoryCards = document.querySelectorAll('.category-card');
+      categoryCards.forEach(card => {
+        const actorName = card.querySelector('h3').textContent.toLowerCase();
+        if (actorName.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function clearSearch() {
+      document.getElementById('search-bar').value = '';
+      filterActors();
+    }
+
+    function showTab(tab) {
+      const tabItems = document.querySelectorAll('.tab-item');
+      const tabContentItems = document.querySelectorAll('.tab-content-item');
+
+      tabItems.forEach(item => {
+        item.classList.remove('active');
+      });
+
+      tabContentItems.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      document.querySelector(`#${tab}`).classList.add('active');
+      document.querySelector(`.tab-item[onclick="showTab('${tab}')"]`).classList.add('active');
+    }
+  </script>
+</body>
+</html>

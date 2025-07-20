@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamil Movie </title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Modern UI Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --secondary: #8b5cf6;
+      --accent: #f472b6;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding-bottom: 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .home-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem 1rem;
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      padding: 2rem 1rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .welcome-section h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+      z-index: 0;
+      animation: rotate 15s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .section-title h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .movie-card {
+      background: var(--bg-secondary);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 150%;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-card:hover .image-container img {
+      transform: scale(1.05);
+    }
+
+    .favorite-icon {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0, 0, 0, 0.7);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    .favorite-icon:hover {
+      background: var(--danger);
+      transform: scale(1.1);
+    }
+
+    .favorite-icon .material-icons {
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    .favorite-icon.red .material-icons {
+      color: var(--danger);
+    }
+
+    .movie-info {
+      padding: 12px;
+    }
+
+    .movie-info h3 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-load-more {
+      display: block;
+      width: 100%;
+      max-width: 200px;
+      margin: 2rem auto;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-load-more:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+    }
+
+    .btn-load-more:active {
+      transform: translateY(0);
+    }
+
+    /* Search Bar Styles */
+    .welcome-section .search-container {
+      position: relative;
+      max-width: 100%;
+      margin: 1rem 0.5rem 0;
+      padding: 0 0.5rem;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      background: rgba(30, 41, 59, 0.8);
+      color: white;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    .clear-icon {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s ease;
+      display: none;
+    }
+
+    .clear-icon:hover {
+      color: var(--text);
+    }
+
+    /* Welcome section styles */
+    .welcome-section {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin: 0.5rem 0.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      background: rgba(30, 41, 59, 0.7);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .welcome-section h1 {
+      margin-bottom: 1rem;
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 0.4rem 0 0.6rem;
+      z-index: 1000;
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+      height: 60px;
+      box-sizing: border-box;
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .nav-item .material-icons {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .nav-item span {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+      }
+
+      .section-title h1 {
+        font-size: 1.7rem;
+      }
+
+      .search-bar {
+        padding: 0.7rem 1rem 0.7rem 2.8rem;
+        font-size: 0.95rem;
+      }
+
+      .search-icon {
+        left: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .section-title h1 {
+        font-size: 1.5rem;
+      }
+
+      .section-title {
+        margin: 1rem 0 1.5rem;
+      }
+
+      .movie-info h3 {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Modern Popup */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      background-color: #1f2937;
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.2s ease-out;
+      text-align: center;
+      max-width: 90%;
+      width: auto;
+      min-width: 200px;
+      pointer-events: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .popup::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
+    }
+
+    .popup.show {
+      transform: translateX(-50%) translateY(0) scale(1);
+      opacity: 1;
+    }
+    
+    /* Modern popup messages with icons */
+    #favorite-popup[data-message="Movie favorited!"]::before {
+      content: '';
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234ade80'%3E%3Cpath d='M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z'/%3E%3C/svg%3E");
+    }
+    
+    #favorite-popup[data-message="Movie favorited!"]::after {
+      content: 'Added to Favorites';
+    }
+    
+    #favorite-popup[data-message="Movie removed from favorites!"]::before {
+      content: '';
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f87171'%3E%3Cpath d='M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z' fill-opacity='0.3'/%3E%3Cpath d='M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z' fill='%23f87171'/%3E%3C/svg%3E");
+    }
+    
+    #favorite-popup[data-message="Movie removed from favorites!"]::after {
+      content: 'Removed from Favorites';
+    }
+  </style>
+</head>
+<body>
+  <div class="home-container">
+    <div class="welcome-section">
+      <h1>Latest Movies</h1>
+      <div class="search-container">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search movies..." oninput="filterMovies()" />
+        <span class="material-icons search-icon">search</span>
+        <span class="material-icons clear-icon" onclick="clearSearch()">cancel</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+    
+      <div id="movies-container" class="movies-grid" data-aos="fade-up">
+      </div>
+      <div class="text-center mt-4">
+        <button id="load-more" class="btn-load-more" onclick="loadMoreMovies()">Load More</button>
+      </div>
+    </div>
+    </main>
+  </div> <!-- Close home-container -->
+
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="navigateTo('home.html')">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('category.html')">
+      <span class="material-icons">category</span>
+      <span>Categories</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('favorites.html')">
+      <span class="material-icons">favorite</span>
+      <span>Favorites</span>
+    </div>
+  </div>
+
+  
+
+  <!-- Modern UI Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+
+  <!-- Popup for favorite notification -->
+  <div id="favorite-popup" class="popup">Movie favorited!</div>
+
+  <!-- New CDN Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/smooth-scrollbar@8.5.2/dist/smooth-scrollbar.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" defer></script>
+  <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js" defer></script>
+  <script>
+    let allMovies = [];
+    let displayedMovies = [];
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let debounceTimeout;
+    let searchLimit = 25; // Limit the number of search results shown
+    let hiddenMovies = [
+      "lucifer",
+      "000000",
+      "Bad Boys",
+      "L2 Empuraan",
+      "Migration"
+    ]; // Add movie names you want to hide here
+
+    // Fetch movie data if on the home page
+    if (document.getElementById("movies-container")) {
+      fetch("https://blacktvafterott.in/movielist.json")
+        .then((response) => response.json())
+        .then((data) => {
+          allMovies = data.map((movie) => ({
+            id: movie.id,
+            title: truncateText(movie.title, 30),
+            image: `https://blacktvafterott.in/${movie.pic}`,
+            video: `https://pub-c112d6c4191e458db7adfadb97398a27.r2.dev/${movie.src}?target=video`,
+            downloadUrl1: movie.downloadUrl1,
+          })).filter(movie => !hiddenMovies.some(hiddenMovie => 
+            movie.title.toLowerCase().includes(hiddenMovie.toLowerCase())
+          ));
+          displayMovies(searchLimit);
+        })
+        .catch((error) => console.error("Error fetching JSON:", error));
+    }
+
+    // Fetch favorite movies if on the favorites page
+    if (document.getElementById("favorites-container")) {
+      viewFavorites();
+    }
+
+    // Truncate text function
+    function truncateText(text, limit) {
+      return text.length > limit ? text.substring(0, limit) + "..." : text;
+    }
+
+    // Display movies function
+    function displayMovies(limit) {
+      const container = document.getElementById("movies-container");
+      const moviesToDisplay = allMovies.slice(displayedMovies.length, displayedMovies.length + limit);
+      displayedMovies = [...displayedMovies, ...moviesToDisplay];
+
+      moviesToDisplay.forEach((movie) => {
+        const movieCard = document.createElement("div");
+        movieCard.className = "movie-card";
+        movieCard.innerHTML = `
+          <div class="image-container" onclick="playVideo('${movie.id}', '${movie.title}', '${movie.image}', '${movie.video}')">
+            <img src="${movie.image}" alt="${movie.title}" />
+            <div class="favorite-icon" onclick="event.stopPropagation(); toggleFavorite('${movie.title}', event)">
+              <span class="material-icons">favorite_border</span>
+            </div>
+          </div>
+          <div class="movie-info">
+            <h3>${truncateText(movie.title, 20)}</h3>
+          </div>
+        `;
+        container.appendChild(movieCard);
+
+        updateFavoritesIcon(movie.title);
+      });
+
+      if (displayedMovies.length >= allMovies.length) {
+        document.getElementById("load-more").style.display = "none";
+      }
+    }
+
+    // Play video function
+    function playVideo(id, title, imageUrl, videoUrl) {
+      window.location.href = `movie-details.html?id=${encodeURIComponent(id)}&title=${encodeURIComponent(title)}&image=${encodeURIComponent(imageUrl)}&video=${encodeURIComponent(videoUrl)}`;
+    }
+
+    // Filter movies function with debounce
+    function filterMovies() {
+      const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+      const clearButton = document.querySelector(".clear-icon");
+      const container = document.getElementById("movies-container");
+      container.innerHTML = "";
+      displayedMovies = [];
+
+      if (searchTerm) {
+        clearButton.style.display = "block";
+        document.body.classList.add("search-active");
+      } else {
+        clearButton.style.display = "none";
+        document.body.classList.remove("search-active");
+      }
+
+      // Clear previous debounce timeout if it's still active
+      clearTimeout(debounceTimeout);
+
+      // Set new debounce timeout
+      debounceTimeout = setTimeout(() => {
+        const filteredMovies = allMovies
+          .filter((movie) => {
+            const normalizedTitle = movie.title.toLowerCase().trim();
+            return !hiddenMovies.some(hiddenMovie => 
+              normalizedTitle.includes(hiddenMovie.toLowerCase().trim())
+            );
+          })
+          .filter((movie) => movie.title.toLowerCase().includes(searchTerm));
+        
+        const moviesToDisplay = filteredMovies.slice(0, searchLimit); // Only show the first 'searchLimit' movies
+
+        moviesToDisplay.forEach((movie) => {
+          const movieCard = document.createElement("div");
+          movieCard.className = "movie-card";
+          movieCard.innerHTML = `
+            <div class="image-container" onclick="playVideo('${movie.id}', '${movie.title}', '${movie.image}', '${movie.video}')">
+              <img src="${movie.image}" alt="${movie.title}" />
+              <div class="favorite-icon" onclick="toggleFavorite('${movie.title}', event)">
+                <span class="material-icons">favorite_border</span>
+              </div>
+            </div>
+            <h3>${movie.title}</h3>
+          `;
+          container.appendChild(movieCard);
+
+          updateFavoritesIcon(movie.title);
+        });
+      }, 300); // Debounce delay of 300ms
+    }
+
+    // Clear search function
+    function clearSearch() {
+      const searchBar = document.getElementById("search-bar");
+      searchBar.value = "";
+      filterMovies();
+    }
+
+    // Toggle favorite function
+    function toggleFavorite(movieTitle, event) {
+      event.stopPropagation();
+      const movieIndex = favorites.findIndex((fav) => fav.title === movieTitle);
+      if (movieIndex === -1) {
+        const movie = allMovies.find((movie) => movie.title === movieTitle);
+        favorites.push(movie);
+        showPopup("Movie favorited!");
+      } else {
+        favorites.splice(movieIndex, 1);
+        showPopup("Movie removed from favorites!");
+      }
+      updateFavoritesIcon(movieTitle);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+
+    // Update favorite icon function
+    function updateFavoritesIcon(movieTitle) {
+      const movieCards = document.querySelectorAll(".movie-card");
+      movieCards.forEach((card) => {
+        const titleElement = card.querySelector("h3");
+        const favoriteIcon = card.querySelector(".favorite-icon span");
+        if (titleElement.textContent === movieTitle) {
+          if (favorites.some((fav) => fav.title === movieTitle)) {
+            favoriteIcon.textContent = "favorite";
+            favoriteIcon.parentElement.classList.add("red");
+          } else {
+            favoriteIcon.textContent = "favorite_border";
+            favoriteIcon.parentElement.classList.remove("red");
+          }
+        }
+      });
+    }
+
+    // View favorites function
+    function viewFavorites() {
+      const container = document.getElementById("favorites-container");
+      container.innerHTML = "";
+
+      favorites.forEach((movie) => {
+        const movieCard = document.createElement("div");
+        movieCard.className = "movie-card favorite-card";
+        movieCard.innerHTML = `
+          <div class="image-container" onclick="playVideo('${movie.id}', '${movie.title}', '${movie.image}', '${movie.video}')">
+            <img src="${movie.image}" alt="${movie.title}" />
+            <div class="favorite-icon" onclick="removeFavorite('${movie.title}', event)">
+              <span class="material-icons">delete</span>
+            </div>
+          </div>
+          <h3>${movie.title}</h3>
+        `;
+        container.appendChild(movieCard);
+      });
+    }
+
+    // Remove favorite function
+    function removeFavorite(movieTitle, event) {
+      event.stopPropagation();
+      favorites = favorites.filter((fav) => fav.title !== movieTitle);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      viewFavorites();
+      updateFavoritesIcon(movieTitle);
+    }
+
+    // Load more movies function
+    function loadMoreMovies() {
+      displayMovies(25);
+    }
+
+    // Navigation function
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+
+    function showPopup(message) {
+      const popup = document.getElementById("favorite-popup");
+      popup.setAttribute('data-message', message);
+      popup.classList.add("show");
+
+      setTimeout(() => {
+        popup.classList.remove("show");
+      }, 2000); // Show popup for 2 seconds
+    }
+
+    function showActorMovies(actor) {
+      // Redirect to actor_movies.html with the actor parameter
+      window.location.href = `actor_movies.html?actor=${actor}`;
+    }
+
+    function filterActors() {
+      const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+      const categoryCards = document.querySelectorAll('.category-card');
+      categoryCards.forEach(card => {
+        const actorName = card.querySelector('h3').textContent.toLowerCase();
+        if (actorName.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function showTab(tab) {
+      const tabItems = document.querySelectorAll('.tab-item');
+      const tabContentItems = document.querySelectorAll('.tab-content-item');
+
+      tabItems.forEach(item => {
+        item.classList.remove('active');
+      });
+
+      tabContentItems.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      document.querySelector(`#${tab}`).classList.add('active');
+      document.querySelector(`.tab-item[onclick="showTab('${tab}')"]`).classList.add('active');
+    }
+
+    // Back button functionality
+
+
+    // Show/hide back button based on page
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const backButton = document.querySelector('.back-button');
+      
+      if (backButton) {
+        // Always show the back button for now
+        backButton.style.display = 'flex';
+        
+        // If you want to hide it on home page, uncomment this:
+        // if (currentPage === 'index.html' || currentPage === 'home.html') {
+        //   backButton.style.display = 'none';
+        // } else {
+        //   backButton.style.display = 'flex';
+        // }
+      }
+    });
+
+    // Initial display of favorites
+    document.addEventListener("DOMContentLoaded", () => {
+      displayFavorites();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multicinema - Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --secondary: #8b5cf6;
+      --accent: #f472b6;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding-bottom: 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .home-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem 1rem;
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      padding: 2rem 1rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .welcome-section h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #f472b6, #8b5cf6, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+      z-index: 0;
+      animation: rotate 15s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .nav-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .nav-card {
+      background: var(--bg-secondary);
+      border-radius: 0.75rem;
+      padding: 1.5rem 0.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary), var(--primary));
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-card:hover::before {
+      opacity: 1;
+    }
+
+    .nav-card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent), var(--secondary), var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-card:hover i {
+      transform: scale(1.1);
+    }
+
+    .nav-card h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin: 0;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 640px) {
+      .nav-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        padding: 0.5rem 0.25rem;
+      }
+      
+      .nav-card {
+        padding: 1.25rem 0.5rem;
+        border-radius: 10px;
+      }
+      
+      .nav-card i {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .nav-card h2 {
+        font-size: 0.9rem;
+      }
+      
+      .header h1 {
+        font-size: 1.4rem;
+      }
+    }
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(99, 102, 241, 0.8);
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem 0.6rem 1rem;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .back-button:hover {
+      background: rgba(99, 102, 241, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .back-button i {
+      font-size: 1.3rem;
+      color: white;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(99, 102, 241, 0.15);
+      padding: 0.5rem 0;
+      z-index: 1000;
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      height: 100%;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: var(--text-secondary);
+      position: relative;
+      flex: 1;
+      max-width: 25%;
+      height: 100%;
+      background: transparent;
+    }
+
+    .nav-item.active {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
+    }
+
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item.active::before {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+      top: 6px;
+    }
+
+    .nav-item i {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.8;
+    }
+
+    .nav-item.active i {
+      opacity: 1;
+      transform: scale(1.1);
+      filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.4));
+    }
+
+    .nav-item span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #e2e8f0, #94a3b8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+      padding: 0 0.2rem;
+      line-height: 1.2;
+    }
+
+    .nav-item.active span {
+      background: linear-gradient(90deg, #ffffff, #e0e7ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-item:active {
+      transform: scale(0.96);
+    }
+
+    .nav-item.active:active {
+      transform: translateY(-6px) scale(0.96);
+    }
+
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px 4px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <button onclick="goBack()" class="back-button">
+    <i class="material-icons">arrow_back</i>
+    <span>Back</span>
+  </button>
+  
+  <div class="home-container">
+    <div class="welcome-section">
+      <h1>Tamil Movie</h1>
+      <p>Your Ultimate Movie Destination</p>
+    </div>
+
+    <div class="nav-cards">
+      <div class="nav-card" onclick="navigateTo('index.html')">
+        <i class="material-icons">movie</i>
+        <h2>All Movies</h2>
+        
+      </div>
+
+      <div class="nav-card" onclick="navigateTo('category.html')">
+        <i class="material-icons">category</i>
+        <h2>Categories</h2>
+        
+      </div>
+
+      <div class="nav-card" onclick="navigateTo('favorites.html')">
+        <i class="material-icons">favorite</i>
+        <h2>Favorites</h2>
+        
+      </div>
+
+      <div class="nav-card" onclick="navigateTo('trending.html')">
+        <i class="material-icons">trending_up</i>
+        <h2>Trending</h2>
+        
+      </div>
+
+      <div class="nav-card" onclick="navigateTo('new-releases.html')">
+        <i class="material-icons">new_releases</i>
+        <h2>New Releases</h2>
+        
+      </div>
+
+      <div class="nav-card" onclick="navigateTo('my-list.html')">
+        <i class="material-icons">playlist_play</i>
+        <h2>My List</h2>
+      </div>
+
+      <div class="nav-card" onclick="navigateTo('my-apps.html')">
+        <i class="material-icons">apps</i>
+        <h2>My Apps</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="navigateTo('home.html')">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('category.html')">
+      <span class="material-icons">category</span>
+      <span>Categories</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('favorites.html')">
+      <span class="material-icons">favorite</span>
+      <span>Favorites</span>
+    </div>
+  </div>
+
+
+  <script>
+    // Back button functionality
+    function goBack() {
+      window.history.back();
+    }
+
+    // Show/hide back button based on page
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+      const backButton = document.querySelector('.back-button');
+      
+      if (backButton) {
+        // Hide on home page, show on others
+        if (currentPage === 'home.html' || currentPage === 'index.html') {
+          backButton.style.display = 'none';
+        } else {
+          backButton.style.display = 'flex';
+        }
+      }
+    });
+
+    // Highlight current page in navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+      document.querySelectorAll('.nav-item').forEach(item => {
+        const href = item.getAttribute('href');
+        if (href === currentPage || 
+            (currentPage === 'index.html' && href === 'home.html')) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    });
+
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>
