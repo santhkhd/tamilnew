@@ -586,12 +586,16 @@
                     const movie = data.find(movie => movie.id == movieId);
                     if (movie) {
                         const downUlr1 = movie.downUlr1;
+// Add event listener to more icon
+document.getElementById('more-icon').addEventListener('click', () => {
 
-                        // Add event listener to more icon
-                        document.getElementById('more-icon').addEventListener('click', () => {
-                            const newPageUrl = `movie_page.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&video=${encodeURIComponent(video)}&download=${encodeURIComponent(downUlr1)}&target=external`;
-                            window.open(newPageUrl, '_blank');
-                        });
+    const newPageUrl = `movie_page.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&video=${encodeURIComponent(video)}&download=${encodeURIComponent(downUlr1)}`;
+
+    // open internal movie page (no target=external here)
+    window.location.href = newPageUrl;
+
+});
+           
                     } else {
                         console.error('Movie not found');
                     }
