@@ -586,16 +586,12 @@
                     const movie = data.find(movie => movie.id == movieId);
                     if (movie) {
                         const downUlr1 = movie.downUlr1;
-// Add event listener to more icon
-document.getElementById('more-icon').addEventListener('click', () => {
 
-    const newPageUrl = `movie_page.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&video=${encodeURIComponent(video)}&download=${encodeURIComponent(downUlr1)}`;
-
-    // open internal movie page (no target=external here)
-    window.location.href = newPageUrl;
-
-});
-           
+                        // Add event listener to more icon
+                        document.getElementById('more-icon').addEventListener('click', () => {
+                            const newPageUrl = `movie_page.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&video=${encodeURIComponent(video)}&download=${encodeURIComponent(downUlr1)}&target=external`;
+                            window.open(newPageUrl, '_blank');
+                        });
                     } else {
                         console.error('Movie not found');
                     }
@@ -613,8 +609,7 @@ document.getElementById('more-icon').addEventListener('click', () => {
 
             // Open YouTube channel when subscribe button is clicked
             subscribeButton.addEventListener('click', () => {
-                const youtubeUrl = 'https://www.youtube.com/@datafactory1?sub_confirmation=1&target=external';
-                window.open(youtubeUrl, '_blank');
+                window.open(youtubeChannelLink, '_blank');
             });
 
             closeButton.addEventListener('click', () => {
